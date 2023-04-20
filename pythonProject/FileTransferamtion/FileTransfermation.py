@@ -1,8 +1,8 @@
 import pandas as pd
 
-input_file_1 = "InstrumentDetails.csv"
-input_file_2 = "PositionDetails.csv"
-output_file = "PositionReport.csv"
+input_file_1 = "../app/in/InstrumentDetails.csv"
+input_file_2 = "../app/in/PositionDetails.csv"
+output_file = "../app/out/PositionReport.csv"
 
 InstrumentDetails_df = pd.read_csv(input_file_1)
 PositionDetails_df = pd.read_csv(input_file_2)
