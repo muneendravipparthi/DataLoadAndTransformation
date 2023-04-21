@@ -31,7 +31,8 @@
 **Output File** 
 “/app/out”
 
-**PositionReport.csv**
+**PositionReport.csv
+DestinationFile = Pandas script df of(Input1 +Input2)**
 
         ID
         PositionID
@@ -42,5 +43,14 @@
 **Script Execution** 
 _pythonProject/FileTransferamtion/FileTransfermation.py_
 
+# Data Validation
 
+    SourceFile = PositionReport.csv
+    DestinationFile = Pandas script df of(Input1 +Input2)
+    Data validation report = SourceFile <> DestinationFile
+
+**To find the data difference between Source and Destination**
+PositionReport_validationreport.csv  / PositionReport_validationreport.xlsx
+
+Note: Wanted entered wrong data in source file to show the failed record in reports 
 
