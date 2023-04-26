@@ -25,7 +25,7 @@ class Data_validation:
 
     def Generate_OutputFile(self, InstrumentDetails_df, PositionDetails_df):
         PositionDetails_df = PositionDetails_df.rename(columns={'ID': 'PositionID'}, inplace=False)
-        output_df = pd.merge(InstrumentDetails_df, PositionDetails_df, how='right', left_on='ISIN',
+        output_df = pd.merge(InstrumentDetails_df, PositionDetails_df, how='right', left_on='ID',
                              right_on='InstrumentID')
         output_df['Total Price'] = output_df['Quantity'] * output_df['Unit Price']
         output_df['ID'] = output_df.index + 1
