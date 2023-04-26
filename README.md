@@ -52,5 +52,5 @@ _pythonProject/FileTransferamtion/FileTransfermation.py_
 **To find the data difference between Source and Destination**
 PositionReport_validationreport.csv  / PositionReport_validationreport.xlsx
 
-Note: Wanted entered wrong data in source file to show the failed record in reports 
+Note: wantedly entered wrong data in source file to show the failed record in reports (PositionId P008) 
 
