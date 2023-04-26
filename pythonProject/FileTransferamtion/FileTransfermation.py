@@ -5,20 +5,30 @@ from openpyxl.utils.cell import get_column_letter
 input_file_1 = "../app/in/InstrumentDetails.csv"
 input_file_2 = "../app/in/PositionDetails.csv"
 output_file = "../app/out/PositionReport.csv"
+
+
 class Data_validation:
 
     def dv(self):
+        print("*******Execution Started*******")
+        # reading CSV
         InstrumentDetails_df = pd.read_csv(input_file_1)
         PositionDetails_df = pd.read_csv(input_file_2)
+        # converting the inputs to output format for source and destination validation
         df = self.Generate_OutputFile(InstrumentDetails_df, PositionDetails_df)
         PositionReport_df = pd.read_csv(output_file)
+        # comparing source and destination data
         df = self.Find_Differences(PositionReport_df, df)
+        #R report generation with differences
         self.Report_Generation(df)
+        print("*******Execution Completed*******")
+
     def Generate_OutputFile(self, InstrumentDetails_df, PositionDetails_df):
-        PositionDetails_df = PositionDetails_df.rename(columns = {'ID':'PositionID'}, inplace = False)
-        output_df = pd.merge(InstrumentDetails_df,PositionDetails_df, how='right', left_on='ISIN', right_on='InstrumentID' )
+        PositionDetails_df = PositionDetails_df.rename(columns={'ID': 'PositionID'}, inplace=False)
+        output_df = pd.merge(InstrumentDetails_df, PositionDetails_df, how='right', left_on='ISIN',
+                             right_on='InstrumentID')
         output_df['Total Price'] = output_df['Quantity'] * output_df['Unit Price']
-        output_df['ID'] = output_df.index+1
+        output_df['ID'] = output_df.index + 1
         output_df["ID"] = output_df.ID.map("{:03}".format)
         output_df['ID'] = 'PR' + output_df['ID'].astype(str)
         outputcolumnslist = ['ID', 'PositionID', 'ISIN', 'Quantity', 'Total Price']
@@ -37,7 +47,7 @@ class Data_validation:
         return df1
 
     def Report_Generation(self, df1):
-        file_name ="PositionReport_validationreport.xlsx"
+        file_name = "PositionReport_validationreport.xlsx"
         sheet_name = "report"
         # Insert an empty column to write the formulas
         df1.insert(len(df1.columns), 'Execution_Status', np.nan)
@@ -107,4 +117,3 @@ class Data_validation:
 
 datavalidation = Data_validation()
 datavalidation.dv()
-
